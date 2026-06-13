@@ -1,0 +1,643 @@
+@charset "UTF-8";
+/**
+  Нормализация блочной модели
+ */
+*,
+::before,
+::after {
+  box-sizing: border-box;
+}
+
+/**
+  Убираем внутренние отступы слева тегам списков,
+  у которых есть атрибут class
+ */
+:where(ul, ol):where([class]) {
+  padding-left: 0;
+}
+
+/**
+  Убираем внешние отступы body и двум другим тегам,
+  у которых есть атрибут class
+ */
+body,
+:where(blockquote, figure, fieldset):where([class]) {
+  margin: 0;
+}
+
+/**
+  Убираем внешние отступы вертикали нужным тегам,
+  у которых есть атрибут class
+ */
+:where(h1, h2, h3, h4, h5, h6, p, ul, ol, dl):where([class]) {
+  margin-block: 0;
+}
+
+:where(dd[class]) {
+  margin-left: 0;
+}
+
+:where(fieldset[class]) {
+  padding: 0;
+  border: none;
+}
+
+/**
+  Убираем стандартный маркер маркированному списку,
+  у которого есть атрибут class
+ */
+:where(ul[class]) {
+  list-style: none;
+}
+
+:where(address[class]) {
+  font-style: normal;
+}
+
+/**
+  Обнуляем вертикальные внешние отступы параграфа,
+  объявляем локальную переменную для внешнего отступа вниз,
+  чтобы избежать взаимодействие с более сложным селектором
+ */
+p {
+  --paragraphMarginBottom: 24px;
+  margin-block: 0;
+}
+
+/**
+  Внешний отступ вниз для параграфа без атрибута class,
+  который расположен не последним среди своих соседних элементов
+ */
+p:where(:not([class], :last-child)) {
+  margin-bottom: var(--paragraphMarginBottom);
+}
+
+/**
+  Упрощаем работу с изображениями и видео
+ */
+img,
+video {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+/**
+  Наследуем свойства шрифт для полей ввода
+ */
+input,
+textarea,
+select,
+button {
+  font: inherit;
+}
+
+html {
+  /**
+    Пригодится в большинстве ситуаций
+    (когда, например, нужно будет "прижать" футер к низу сайта)
+   */
+  height: 100%;
+  /**
+    Убираем скачок интерфейса по горизонтали
+    при появлении / исчезновении скроллбара
+   */
+  scrollbar-gutter: stable;
+  /**
+    Плавный скролл
+   */
+  scroll-behavior: smooth;
+}
+
+body {
+  /**
+    Пригодится в большинстве ситуаций
+    (когда, например, нужно будет "прижать" футер к низу сайта)
+   */
+  min-height: 100%;
+  /**
+    Унифицированный интерлиньяж
+   */
+  line-height: 1.5;
+}
+
+/**
+  Нормализация высоты элемента ссылки при его инспектировании в DevTools
+ */
+a:where([class]) {
+  display: inline-flex;
+}
+
+/**
+  Курсор-рука при наведении на элемент
+ */
+button,
+label {
+  cursor: pointer;
+}
+
+/**
+  Убирает серую подсветку при тапе на мобильных устройствах (iOS/Android)
+ */
+button {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/**
+  Приводим к единому цвету svg-элементы
+  (за исключением тех, у которых уже указан
+  атрибут fill со значением 'none' или начинается с 'url')
+ */
+:where([fill]:not([fill=none], [fill^=url])) {
+  fill: currentcolor;
+}
+
+/**
+  Приводим к единому цвету svg-элементы
+  (за исключением тех, у которых уже указан
+  атрибут stroke со значением 'none')
+ */
+:where([stroke]:not([stroke=none], [stroke^=url])) {
+  stroke: currentcolor;
+}
+
+/**
+  Чиним баг задержки смены цвета при взаимодействии с svg-элементами
+ */
+svg * {
+  transition-property: fill, stroke;
+}
+
+/**
+  Приведение рамок таблиц в классический 'collapse' вид
+ */
+:where(table) {
+  border-collapse: collapse;
+  border-color: currentcolor;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  border: none;
+  background-color: transparent;
+}
+
+/**
+  Удаляем все анимации и переходы для людей,
+  которые предпочитают их не использовать
+ */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+@font-face {
+  font-family: Montserrat;
+  src: url("./fonts/Montserrat-Bold.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: Montserrat;
+  src: url("./fonts/Montserrat-Medium.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: Montserrat;
+  src: url("./fonts/Montserrat-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+:root {
+  --color-light: #fff;
+  --color-dark: #262d36;
+  --color-dark-brown: #481c03;
+  --color-dark-gray: #4d4d4d;
+  --color-accent: #fe9e45;
+  --font-family: "Montserrat", sans-serif;
+  --container: 1400px;
+  --padding-inline: 30px;
+}
+@media (max-width: 1023px) {
+  :root {
+    --padding-inline: 20px;
+  }
+}
+@media (max-width: 767px) {
+  :root {
+    --padding-inline: 15px;
+  }
+}
+:root {
+  --container-width: calc(var(--container) + var(--padding-inline) * 2);
+  --transition-duration: 0.2s;
+  --box-shadow: 0px 0px 15px 2px var(--color-accent);
+  --border: 1px solid var(--color-light);
+  --separator: 1px solid currentcolo;
+  --header-height: 90px;
+}
+@media (max-width: 1023px) {
+  :root {
+    --header-height: 78px;
+  }
+}
+@media (max-width: 767px) {
+  :root {
+    --header-height: 136px;
+  }
+}
+:root {
+  --z-header: 100;
+}
+
+body {
+  color: var(--color-light);
+  background-color: var(--color-dark);
+  font-family: var(--font-family);
+  font-weight: 400;
+  line-height: 1.4;
+}
+
+.header,
+.section,
+.footer {
+  padding-inline: var(--padding-inline);
+}
+
+.section:not(:first-child) {
+  padding-top: 40px;
+}
+.section {
+  padding-bottom: 20px;
+}
+
+.container {
+  max-width: var(--container-width);
+  margin-inline: auto;
+}
+
+.visually-hidden {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  margin: -1px !important;
+  border: 0 !important;
+  padding: 0 !important;
+  white-space: nowrap !important;
+  clip-path: inset(100%) !important;
+  clip: rect(0 0 0 0) !important;
+  overflow: hidden !important;
+}
+
+.header {
+  --padding-block: 15px;
+  height: var(--header-height);
+  position: relative;
+  z-index: var(--z-header);
+}
+.header .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  padding-block: var(--padding-block);
+}
+@media (max-width: 767px) {
+  .header .container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    row-gap: 36px;
+  }
+}
+@media (max-width: 1023px) {
+  .header__logo-image {
+    width: 160px;
+  }
+}
+.header__nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  column-gap: 80px;
+}
+@media (max-width: 1023px) {
+  .header__nav {
+    display: contents;
+  }
+}
+.header__nav-list {
+  font-size: clamp(1rem, 1.25vw, 1.5rem);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  column-gap: 40px;
+}
+@media (max-width: 1023px) {
+  .header__nav-list {
+    column-gap: 20px;
+  }
+}
+@media (max-width: 767px) {
+  .header__nav-list {
+    column-gap: 30px;
+  }
+}
+.header__nav-list-item {
+  transition-duration: var(--transition-duration);
+}
+@media (hover: hover) {
+  .header__nav-list-item:hover {
+    color: var(--color-accent);
+    text-shadow: 0 0 10px var(--color-accent);
+  }
+}
+@media (hover: none) {
+  .header__nav-list-item:active {
+    color: var(--color-accent);
+    text-shadow: 0 0 10px var(--color-accent);
+  }
+}
+.header__button {
+  font-size: clamp(1rem, 1.25vw, 1.5rem);
+  color: var(--color-accent);
+  border: 1px solid var(--color-accent);
+  box-shadow: 0 0 10px 0.5px var(--color-accent), inset 0 0 10px 0.5px var(--color-accent);
+  line-height: 1;
+  padding: 15px 22px;
+  transition-duration: var(--transition-duration);
+}
+@media (hover: hover) {
+  .header__button:hover {
+    box-shadow: 0 0 20px 0.5px var(--color-accent), inset 0 0 20px 0.5px var(--color-accent);
+    text-shadow: 0 0 10px var(--color-accent);
+  }
+}
+@media (hover: none) {
+  .header__button:active {
+    box-shadow: 0 0 20px 0.5px var(--color-accent), inset 0 0 20px 0.5px var(--color-accent);
+    text-shadow: 0 0 10px var(--color-accent);
+  }
+}
+@media (max-width: 1023px) {
+  .header__button {
+    padding: 12px 18px;
+  }
+}
+@media (max-width: 767px) {
+  .header__button {
+    display: none;
+  }
+}
+
+.welcome {
+  --container-width: calc(920px + var(--padding-inline) * 2);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: url("./images/welcome-bg.webp") center/cover no-repeat;
+  min-height: 100vh;
+  margin-top: calc(var(--header-height) * -1);
+  padding-block: 30px 60px;
+}
+.welcome .container {
+  margin-top: var(--header-height);
+  text-align: center;
+}
+.welcome__title {
+  font-size: clamp(2rem, 2.5vw, 3rem);
+  margin-bottom: 50px;
+}
+.welcome__list {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  column-gap: 76px;
+  padding-bottom: 70px;
+  margin-bottom: 10px;
+}
+@media (max-width: 1023px) {
+  .welcome__list {
+    max-width: 690px;
+  }
+}
+@media (max-width: 767px) {
+  .welcome__list {
+    flex-direction: column;
+    row-gap: 40px;
+  }
+}
+.welcome__list-item {
+  font-size: clamp(1rem, 1.25vw, 1.5rem);
+}
+.welcome__list-item-1 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  row-gap: 5px;
+}
+.welcome__list-item-1::before {
+  content: "";
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: 100px;
+  aspect-ratio: 1;
+}
+.welcome__list-item-1::before {
+  background-image: url("./icons/welcome/1.svg");
+}
+@media (max-width: 1023px) {
+  .welcome__list-item-1::before {
+    width: 80px;
+  }
+}
+@media (max-width: 767px) {
+  .welcome__list-item-1 {
+    flex-direction: row;
+    column-gap: 20px;
+  }
+}
+.welcome__list-item-2 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  row-gap: 5px;
+}
+.welcome__list-item-2::before {
+  content: "";
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: 100px;
+  aspect-ratio: 1;
+}
+.welcome__list-item-2::before {
+  background-image: url("./icons/welcome/2.svg");
+}
+@media (max-width: 1023px) {
+  .welcome__list-item-2::before {
+    width: 80px;
+  }
+}
+@media (max-width: 767px) {
+  .welcome__list-item-2 {
+    flex-direction: row;
+    column-gap: 20px;
+  }
+}
+.welcome__list-item-3 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  row-gap: 5px;
+}
+.welcome__list-item-3::before {
+  content: "";
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: 100px;
+  aspect-ratio: 1;
+}
+.welcome__list-item-3::before {
+  background-image: url("./icons/welcome/3.svg");
+}
+@media (max-width: 1023px) {
+  .welcome__list-item-3::before {
+    width: 80px;
+  }
+}
+@media (max-width: 767px) {
+  .welcome__list-item-3 {
+    flex-direction: row;
+    column-gap: 20px;
+  }
+}
+.welcome__list-item {
+  font-weight: 700;
+}
+.welcome__description {
+  font-size: clamp(1.125rem, 1.25vw, 1.5rem);
+  margin-bottom: 100px;
+  max-width: 920px;
+}
+@media (max-width: 1023px) {
+  .welcome__description {
+    max-width: 690px;
+  }
+}
+@media (max-width: 767px) {
+  .welcome__description {
+    margin-bottom: 60px;
+  }
+}
+.welcome__description--accent {
+  color: var(--color-accent);
+}
+.welcome__button {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  row-gap: 10px;
+}
+.welcome__button::before {
+  content: "";
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: 38px;
+  aspect-ratio: 1;
+}
+.welcome__button {
+  font-size: clamp(1.5rem, 1.5625vw, 1.875rem);
+  display: inline-flex;
+  flex-direction: row;
+  column-gap: 8px;
+  justify-content: center;
+  background-color: var(--color-accent);
+  padding: 16px 24px;
+  border: 1px solid var(--color-light);
+  box-shadow: 0 0 15px 2px var(--color-accent);
+  font-weight: 700;
+  transition-duration: var(--transition-duration);
+}
+@media (hover: hover) {
+  .welcome__button:hover {
+    box-shadow: 0 0 30px 2px var(--color-accent);
+  }
+}
+@media (hover: none) {
+  .welcome__button:active {
+    box-shadow: 0 0 30px 2px var(--color-accent);
+  }
+}
+.welcome__button::before {
+  background-image: url("./icons/welcome/server.svg");
+}
+
+.benefits {
+  background: url("./images/patern-bg.png") center/600px repeat, var(--color-light);
+  color: var(--color-dark-gray);
+  text-align: center;
+}
+.benefits__title {
+  font-size: clamp(1.75rem, 1.875vw, 2.25rem);
+  margin-bottom: 124px;
+}
+.benefits__list {
+  --column-gap: 144px;
+  --row-gap: 252px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(312px, 100%), 1fr));
+  gap: var(--row-gap) var(--column-gap);
+  margin-bottom: 168px;
+}
+.benefits__list-item {
+  font-size: clamp(1rem, 1.25vw, 1.5rem);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  row-gap: 38px;
+}
+.benefits__list-item::before {
+  content: "";
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: 105px;
+  aspect-ratio: 1;
+}
+.benefits__list-item::before {
+  background-image: url("./icons/benefits/1.svg");
+}
+.benefits__list-item-value {
+  font-size: clamp(1.5rem, 1.875vw, 2.25rem);
+  color: var(--color-dark-brown);
+  font-weight: 700;
+}
+.benefits__list-item-description {
+  font-size: clamp(1.5rem, 1.0416666667vw, 1.25rem);
+}
+
+/*# sourceMappingURL=styles.css.map */

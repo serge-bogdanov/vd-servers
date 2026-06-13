@@ -1,0 +1,35 @@
+:root {
+  --color-light: #fff;
+  --color-dark: #262d36;
+  --color-dark-brown: #481c03;
+  --color-dark-gray: #4d4d4d;
+  --color-accent: #fe9e45;
+  --font-family: "Montserrat", sans-serif;
+  --container: 1400px;
+  --padding-inline: 30px;
+
+  @include tablet {
+    --padding-inline: 20px;
+  }
+
+  @include mobile {
+    --padding-inline: 15px;
+  }
+
+  --container-width: calc(var(--container) + var(--padding-inline) * 2);
+  --transition-duration: 0.2s;
+  --box-shadow: 0px 0px 15px 2px var(--color-accent);
+  --border: 1px solid var(--color-light);
+  --separator: 1px solid currentcolo;
+  --header-height: 90px;
+
+  @include tablet {
+    --header-height: 78px;
+  }
+
+  @include mobile {
+    --header-height: 136px;
+  }
+
+  --z-header: 100;
+}

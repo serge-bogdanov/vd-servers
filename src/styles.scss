@@ -1,0 +1,6 @@
+@import "./styles/normalize";
+@import "./styles/media";
+@import "./styles/fonts", "./styles/variables", "./styles/globals",
+  "./styles/functions", "./styles/mixins", "./styles/util";
+@import "./styles/blocks/header", "./styles/blocks/main",
+  "./styles/blocks/footer";

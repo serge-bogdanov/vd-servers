@@ -1,0 +1,13 @@
+body {
+  color: var(--color-light);
+  background-color: var(--color-dark);
+  font-family: var(--font-family);
+  font-weight: 400;
+  line-height: 1.4;
+}
+
+.header,
+.section,
+.footer {
+  padding-inline: var(--padding-inline);
+}

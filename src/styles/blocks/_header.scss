@@ -1,0 +1,88 @@
+.header {
+  --padding-block: 15px;
+
+  height: var(--header-height);
+  position: relative;
+  z-index: var(--z-header);
+
+  & .container {
+    @include flex-space-between;
+    @include underline(#fff);
+
+    padding-block: var(--padding-block);
+
+    @include mobile {
+      @include flex-column(36px);
+    }
+  }
+
+  &__logo {
+    &-image {
+      @include tablet {
+        width: 160px;
+      }
+    }
+  }
+
+  &__nav {
+    @include flex-center;
+
+    column-gap: 80px;
+
+    @include tablet {
+      display: contents;
+    }
+
+    &-list {
+      @include text-size(16, 24);
+      @include flex-center;
+
+      column-gap: 40px;
+
+      @include tablet {
+        column-gap: 20px;
+      }
+
+      @include mobile {
+        column-gap: 30px;
+      }
+
+      &-item {
+        transition-duration: var(--transition-duration);
+
+        @include hover {
+          color: var(--color-accent);
+          text-shadow: 0 0 10px var(--color-accent);
+        }
+      }
+    }
+  }
+
+  &__button {
+    @include text-size(16, 24);
+
+    color: var(--color-accent);
+    border: 1px solid var(--color-accent);
+    box-shadow:
+      0 0 10px 0.5px var(--color-accent),
+      inset 0 0 10px 0.5px var(--color-accent);
+    line-height: 1;
+    padding: 15px 22px;
+    transition-duration: var(--transition-duration);
+
+    @include hover {
+      box-shadow:
+        0 0 20px 0.5px var(--color-accent),
+        inset 0 0 20px 0.5px var(--color-accent);
+      text-shadow: 0 0 10px var(--color-accent);
+    }
+
+    @include tablet {
+      padding: 12px 18px;
+    }
+
+    @include mobile {
+      display: none;
+    }
+  }
+}

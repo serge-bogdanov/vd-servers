@@ -1,0 +1,44 @@
+@mixin text-size($min: 16, $max: 24) {
+  font-size: clamp(rem($min), vw($max), rem($max));
+}
+
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin flex-column($gap: 10px) {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  row-gap: $gap;
+}
+
+@mixin flex-space-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+@mixin text-with-icon($width: 100, $gap: 5) {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  row-gap: $gap + px;
+
+  &::before {
+    content: "";
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: $width + px;
+    aspect-ratio: 1;
+  }
+}
+
+@mixin underline($color: #fff) {
+  border-bottom: 1px solid rgba($color, 0.3);
+}

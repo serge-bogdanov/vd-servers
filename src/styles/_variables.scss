@@ -1,5 +1,6 @@
 :root {
   --color-light: #fff;
+  --color-light-alt: #E3E3E3;
   --color-dark: #262d36;
   --color-dark-brown: #481c03;
   --color-dark-gray: #4d4d4d;
@@ -20,7 +21,6 @@
   --transition-duration: 0.2s;
   --box-shadow: 0px 0px 15px 2px var(--color-accent);
   --border: 1px solid var(--color-light);
-  --separator: 1px solid currentcolo;
   --header-height: 90px;
 
   @include tablet {

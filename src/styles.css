@@ -1125,7 +1125,7 @@ body {
   background: url("./images/patern-3-bg.png") center/cover no-repeat, var(--color-dark);
   color: var(--color-light);
   padding: 40px 80px;
-  border-radius: 20px;
+  border-radius: 20px 20px 0 0;
 }
 @media (max-width: 767px) {
   .steps {
@@ -1176,8 +1176,8 @@ body {
 }
 @media (max-width: 1023px) {
   .steps__steps {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: 1fr;
     justify-content: center;
     align-items: center;
     row-gap: 50px;
@@ -1200,8 +1200,8 @@ body {
 .steps__step-number {
   font-size: clamp(2rem, 2.5vw, 3rem);
   background-color: var(--color-accent);
-  height: 90px;
-  width: 80px;
+  min-height: 90px;
+  min-width: 80px;
   border: 1px solid var(--color-light);
   border-radius: 10px 0 0 10px;
   display: flex;
@@ -1210,7 +1210,7 @@ body {
 }
 @media (max-width: 767px) {
   .steps__step-number {
-    width: 8vw;
+    width: max(35px, auto);
     min-height: 70px;
   }
 }
@@ -1220,8 +1220,7 @@ body {
   justify-content: start;
   align-items: center;
   padding: 15px;
-  height: 90px;
-  width: 360px;
+  min-height: 90px;
   line-height: 1;
   border-radius: 0 10px 10px 0;
   border: 1px solid var(--color-light);
@@ -1229,7 +1228,6 @@ body {
 }
 @media (max-width: 767px) {
   .steps__step-description {
-    width: calc(100% - var(--padding-inline) * 2);
     min-height: 70px;
     padding: 10px;
   }
@@ -1242,7 +1240,7 @@ body {
 .steps__step-1::before {
   position: absolute;
   left: 2vw;
-  top: 80px;
+  top: 90px;
   z-index: var(--steps-z-path);
   content: "";
   background: url("./icons/how-to-works/steps/path.svg") center/contain no-repeat;
@@ -1273,6 +1271,10 @@ body {
   margin-left: 36vw;
 }
 
+.faq {
+  position: relative;
+  top: -40px;
+}
 .faq__list {
   display: grid;
   gap: 40px;

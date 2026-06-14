@@ -442,7 +442,7 @@
     var(--color-dark);
   color: var(--color-light);
   padding: 40px 80px;
-  border-radius: 20px;
+  border-radius: 20px 20px 0 0 ;
 
   @include mobile {
     padding: 80px 5px;
@@ -496,8 +496,8 @@
       
       @include text-size(16, 22);
       @include tablet {
-          display: flex;
-          flex-direction: column;
+          display: grid;
+          grid-template-columns: 1fr;
           justify-content: center;
           align-items: center;
           row-gap: 50px;
@@ -521,8 +521,8 @@
           @include text-size(32, 48);
 
           background-color: var(--color-accent);
-          height: 90px;
-          width: 80px;
+          min-height: 90px;
+          min-width: 80px;
           border: 1px solid var(--color-light);
           border-radius: 10px 0 0 10px;
           display: flex;
@@ -530,7 +530,7 @@
           align-items: center;
           
           @include mobile {
-          width: 8vw;
+          width: max(35px, auto);
           min-height: 70px;
         }
         }
@@ -541,15 +541,14 @@
           justify-content: start;
           align-items: center;
           padding: 15px;
-          height: 90px;
-          width: 360px;
+          min-height: 90px;
           line-height: 1;
           border-radius: 0 10px 10px 0;
           border: 1px solid var(--color-light);
           background-color: var(--color-dark);
 
           @include mobile {
-          width: calc(100% - var(--padding-inline) * 2);
+
           min-height: 70px;
           padding: 10px;
         }
@@ -561,15 +560,15 @@
           margin-bottom: 90px;
           &::before {
             position: absolute;
-    left: 2vw;
-    top: 80px;
-    z-index: var(--steps-z-path);
-    content: "";
-    background: url("./icons/how-to-works/steps/path.svg") center/contain no-repeat;
-    width: 765px;
-    height: 668px;
-    @include tablet {
-    display: none;
+            left: 2vw;
+            top: 90px;
+            z-index: var(--steps-z-path);
+            content: "";
+            background: url("./icons/how-to-works/steps/path.svg") center/contain no-repeat;
+            width: 765px;
+            height: 668px;
+            @include tablet {
+            display: none;
   }
   }
          }
@@ -594,6 +593,8 @@
 		
 }
 .faq {
+position: relative;
+top: -40px;
 
 &__list {
   display: grid;
